@@ -1,0 +1,4 @@
+[submodule "ljd"]
+	path = ljd
+	url = https://github.com/thewhitegoatcb/ljd.git
+	branch = master
