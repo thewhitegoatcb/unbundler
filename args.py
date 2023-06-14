@@ -8,7 +8,7 @@ def parse(args):
     parser.add_argument('-f', metavar='--file', type=pathlib.Path, dest="file_name", nargs='?', help='input bundle file')
     parser.add_argument('-d', metavar='--directory', type=pathlib.Path, dest="folder_name", nargs='?', help='input bundle folder')
     parser.add_argument('-o', metavar='--output', type=pathlib.Path, dest="output", required=True, help='output file path when -f/--file is used or folder path for -d/--directory')
-    parser.add_argument('-s', metavar='--skip-patches', type=bool, dest="skip_patchs", help='skip patch files')
+    # parser.add_argument('-s', metavar='--skip-patches', type=bool, dest="skip_patchs", help='skip patch files')
     parser.add_argument('-i', metavar='--ignore', type=str, dest="ignore_paths", nargs='*', help='regular expression to ignore file paths')
     parser.add_argument('-D', '--decompile', dest="decompile", action='store_true', help='decompile lua files and place them in the output folder')
     parser.add_argument('-j', metavar='--ljd', type=pathlib.Path, dest="ljd_path", default='./ljd/main.py', help='ljd path, needs a special version of LJD to work')

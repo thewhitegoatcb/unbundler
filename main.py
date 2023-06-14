@@ -51,7 +51,7 @@ class Main:
         return bundle_patches
     
 
-    def parse_all_directory(self, path, output_path, ignore_list):
+    def parse_all_directory(self, path, output_path, ignore_list, decompile):
         bundle_paths = self.get_bundles(path)
         bundle_patches = self.get_all_bundle_patches(bundle_paths)
 
@@ -60,14 +60,14 @@ class Main:
                 extracted_files = set()
                 for _patch, path in sorted(sorted_bundle.items(), reverse=True):
                     try:
-                        extractor = LuaExtractor(output_path, False, ignore_list, extracted_files, self.options.decompile)
+                        extractor = LuaExtractor(output_path, False, ignore_list, extracted_files, decompile)
                         bfile = Bundle.load(path, self.get_stream_file_path(path))
                         bfile.parse(extractor)
                         extracted_files.union(extractor.extracted_files)
                     except Exception as error:
                         print(f"An exception occurred while processing {path}:", error)
                     
-    def parse_bundle(self, path, output_path, ignore_list):
+    def parse_bundle(self, path, output_path, ignore_list, decompile):
         extractor = LuaExtractor(output_path, False, ignore_list, None, self.options.decompile)
         bfile = Bundle.load(path, self.get_stream_file_path(path))
         bfile.parse(extractor)
@@ -95,9 +95,9 @@ class Main:
             self.setup_ljd(self.options.ljd_path)
         
         if self.options.file_name:
-            self.parse_bundle(self.options.file_name, self.options.output, self.options.ignore_paths)
+            self.parse_bundle(self.options.file_name, self.options.output, self.options.ignore_paths, self.options.decompile)
         elif self.options.folder_name:
-            self.parse_all_directory(self.options.folder_name, self.options.output, self.options.ignore_paths)
+            self.parse_all_directory(self.options.folder_name, self.options.output, self.options.ignore_paths, self.options.decompile)
         
 
 if __name__ == "__main__":
