@@ -1,6 +1,6 @@
-from bundled_file import BundeledFile
-from bundle import Bundle
-from murmur2 import murmur64str
+from unbundler.bundled_file import BundeledFile
+from unbundler.bundle import Bundle
+from unbundler.murmur2 import murmur64str
 
 import struct
 import pathlib
@@ -73,13 +73,9 @@ class LuaExtractor:
                     return False
         
         system_path: pathlib.Path = self.output_path / path
-        if system_path.is_file():
-            print("Exists!")
-            
         system_path.parent.mkdir(parents=True, exist_ok=True)
         if self.is_decompile:
             self.decompile(path, system_path, data)
-            self.extracted_files.add(bundled_file.filename_hash)
             return True
         else:
             with system_path.open('wb') as file:
