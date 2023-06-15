@@ -63,7 +63,7 @@ class Main:
                         extractor = LuaExtractor(output_path, False, ignore_list, extracted_files, decompile)
                         bfile = Bundle.load(path, self.get_stream_file_path(path))
                         bfile.parse(extractor)
-                        extracted_files.union(extractor.extracted_files)
+                        extracted_files = extracted_files.union(extractor.extracted_files)
                     except Exception as error:
                         print(f"An exception occurred while processing {path}:", error)
                     
